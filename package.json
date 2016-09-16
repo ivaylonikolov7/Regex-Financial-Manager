@@ -1,0 +1,14 @@
+{
+  "name": "regex-financial-manager",
+  "version": "0.0.1",
+  "description": "Financial manager that works with regex",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "regex"
+  ],
+  "author": "Ivaylo Nikolov",
+  "license": "ISC"
+}
