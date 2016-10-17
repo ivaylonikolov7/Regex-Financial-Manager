@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var server = require('http').Server(app);
+var port = process.env.PORT || 3000;
 var exphbs = require('express-handlebars');
 var bodyParser = require('body-parser');
 var io = require('socket.io')(server);
@@ -640,7 +641,8 @@ notifier(imap).on("mail", function(mail) {
 
 function pad(n){return n<10 ? '0'+n : n}
 
-server.listen(3000, function()
+server.listen(port, function()
 {
-    console.log('app listening on port 3000');
+    console.log(process.env.PORT);
+    console.log('app listening on port 80');
 });
