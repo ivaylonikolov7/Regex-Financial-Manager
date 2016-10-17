@@ -28,11 +28,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="35" selection-start-line="3" selection-start-column="35" selection-end-line="3" selection-end-column="35" />
+            <state relative-caret-position="377">
+              <caret line="643" column="30" selection-start-line="643" selection-start-column="30" selection-end-line="643" selection-end-column="30" />
               <folding>
                 <element signature="e#892#1736#0" expanded="false" />
                 <element signature="e#3885#9407#0" expanded="false" />
@@ -48,6 +48,16 @@
                 <element signature="e#21610#21614#0" expanded="false" />
                 <element signature="e#21658#23615#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="npm-debug.log" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/npm-debug.log">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="122">
+              <caret line="58" column="119" selection-start-line="52" selection-start-column="55" selection-end-line="58" selection-end-column="119" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -390,12 +400,12 @@
       <workItem from="1475873198143" duration="17564000" />
       <workItem from="1476171183181" duration="601000" />
       <workItem from="1476707366910" duration="8000" />
-      <workItem from="1476708410435" duration="11919000" />
+      <workItem from="1476708410435" duration="12523000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="471623000" />
+    <option name="totallyTimeSpent" value="472227000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="90" y="41" width="1400" height="974" extended-state="0" />
@@ -504,14 +514,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Classes/FactoryORM.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" column="28" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/layouts/main.handlebars">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -945,8 +947,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="35" selection-start-line="3" selection-start-column="35" selection-end-line="3" selection-end-column="35" />
+        <state relative-caret-position="377">
+          <caret line="643" column="30" selection-start-line="643" selection-start-column="30" selection-end-line="643" selection-end-column="30" />
           <folding>
             <element signature="e#892#1736#0" expanded="false" />
             <element signature="e#3885#9407#0" expanded="false" />
@@ -962,6 +964,14 @@
             <element signature="e#21610#21614#0" expanded="false" />
             <element signature="e#21658#23615#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/npm-debug.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="122">
+          <caret line="58" column="119" selection-start-line="52" selection-start-column="55" selection-end-line="58" selection-end-column="119" />
+          <folding />
         </state>
       </provider>
     </entry>

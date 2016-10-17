@@ -644,5 +644,5 @@ function pad(n){return n<10 ? '0'+n : n}
 server.listen(port, function()
 {
     console.log(process.env.PORT);
-    console.log('app listening on port 80');
+    console.log('app listening on port ' + process.env.PORT);
 });
