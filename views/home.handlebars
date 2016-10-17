@@ -1,18 +1,19 @@
 <table>
     <tr>
+        <th>Example</th>
         <th>Card</th>
         <th>Amount</th>
-        <th>Payee</th>
         <th>Date</th>
     </tr>
-
-        {{#each data}}
-            <tr>
-                <td>{{this.card}}</td>
-                <td>{{ this.amount }}</td>
-                <td>{{ this.payee }}</td>
-                <td>{{ this.dateBought }}</td>
-            </tr>
-        {{/each}}
-
+    {{#each data}}
+    <tr>
+        <td>{{this.example}}</td>
+        <td>{{this.card}}</td>
+        <td>{{this.amount}}</td>
+        <td>{{this.dateBought}}</td>
+    </tr>
+    {{/each}}
 </table>
+<script src="/socket.io/socket.io.js"></script>
+<script src="./static/add-record.js"></script>
+<script src="./static/libs/jquery-3.1.0.min.js"></script>

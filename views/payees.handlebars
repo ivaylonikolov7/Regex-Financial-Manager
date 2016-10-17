@@ -1,0 +1,64 @@
+
+<table>
+    <tr>
+        <th>Payee</th>
+        <th>Description</th>
+        <th>Main Category</th>
+        <th>Sub-Category</th>
+    </tr>
+    {{#each payees}}
+        <tr id="{{this.id}}" class="added-payee">
+            <td><input type="text" value="{{this.payee}}" class="payee"></td>
+            <td><input type="text" value="{{this.description}}" class="description"></td>
+            <td>
+
+                    <select class="categories" name="categories">
+                        {{#unless withCategory}}<option value="null">Select category</option>{{/unless}}
+                         {{{showCategoryOptions this.category.name}}}
+                    </select>
+            </td>
+            <td>
+                <select class="subcategories" name="subcategories" style="display: {{#if hideSubcategory}} none {{else}} block{{/if}};">
+                    {{#unless withSubcategory}}<option value="null">Select subcategory</option>{{/unless}}
+                    {{{showSubcategoryOptions this.subcategory.name this.category.id}}}
+                </select>
+            </td>
+            <td>
+                <button class="delete-payee">Delete</button>
+            </td>
+        </tr>
+    {{/each}}
+    <tr class="add-payee">
+            <td>
+                <input type="text" name="payee" class="payee">
+            </td>
+            <td>
+                <input type="text" name="description" class="description">
+            </td>
+            <td>
+                <select class="categories" name="categories">
+                    <option>Select category</option>
+                    {{#each categories}}
+                        <option value="{{this.id}}">
+                            {{this.name}}
+                        </option>
+                    {{/each}}
+                </select>
+            </td>
+            <td>
+                <select class="subcategories" name="subcategories">
+                    <option>Select subcategory</option>
+                </select>
+            </td>
+            <td>
+                <button class="delete-payee">Delete</button>
+            </td>
+        </tr>
+</table>
+<button id="save-payee">Save</button>
+<button id="add-payee">Add payee</button>
+<script src="./../static/Payee.js"></script>
+<script src="http://underscorejs.org/underscore-min.js"></script>
+<script src="./../static/ListPayees.js"></script>
+<script src="./static/libs/jquery-3.1.0.min.js"></script>
+<script src="../../static/payees.js"></script>

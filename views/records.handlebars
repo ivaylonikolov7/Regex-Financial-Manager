@@ -1,0 +1,107 @@
+<table>
+    <tr>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Amount</th>
+        <th>Description</th>
+        <th>Payee</th>
+        <th>Category</th>
+        <th>Subcategory</th>
+        <th>Correction</th>
+        <th>Note</th>
+        <th>Expense</th>
+    </tr>
+    {{#each outputRecordModels}}
+        <tr id="{{this.id}}" class="added-records">
+            <td>
+                <input type="date" value="{{this.date}}" class="date">
+            </td>
+            <td>
+                <input type="time" class="time" value="{{this.time}}">
+            </td>
+            <td>
+                <input type="text" value="{{this.amount}}" class="amount">
+            </td>
+            <td>
+                <input type="text" class="description" value="{{this.payee.description}}">
+            </td>
+            <td>
+                <input type="text" class="payee" value="{{this.payee.payee}}">
+            </td>
+            <td>
+                <select class="categories">
+                    <option value=>Select category</option>
+                    {{{showCategoryOptions this.payee.category }}}
+                </select>
+            </td>
+            <td>
+
+            <select class="subcategories" style="display:{{#if this.singleSubcategory}}none{{else}} block{{/if}};">
+                        <option value>Select subcategory</option>
+                         {{{showSubcategoryOptions this.payee.category this.payee.subcategory}}}
+            </select>
+            </td>
+            <td>
+                <input type="text" class="correction" value="{{this.correction}}"></td>
+            <td>
+                <input type="text" class="note" value="{{this.note}}">
+            </td>
+            <td>
+                <input type="text" class="expense" disabled value="{{this.expense}}">
+            </td>
+            <td>
+                <button class="delete-record">Delete</button>
+            </td>
+        </tr>
+    {{/each}}
+    <tr class="records-to-add">
+        <td>
+            <input type="date"  class="date">
+        </td>
+        <td>
+            <input type="time" class="time">
+        </td>
+        <td>
+            <input type="text" value="{{this.amount}}" class="amount" placeholder=" ">
+        </td>
+        <td>
+            <input type="text" class="description" value="{{this.payee.description}}">
+        </td>
+        <td>
+            <input type="text" class="payee" value="{{this.payee.payee}}">
+        </td>
+        <td>
+            <select class="categories">
+                <option value=>Select category</option>
+                {{{showCategoryOptions this.payee.category }}}
+            </select>
+        </td>
+        <td>
+            <select class="subcategories">
+                <option value>Select subcategory</option>
+                {{{showSubcategoryOptions this.payee.category this.payee.subcategory}}}
+            </select>
+        </td>
+        <td>
+            <input type="text" class="correction" value="{{this.correction}}"></td>
+        <td>
+            <input type="text" class="note" value="{{this.note}}">
+        </td>
+        <td>
+            <input type="text" disabled class="expense">
+        </td>
+        <td>
+            <button class="delete-record">Delete</button>
+        </td>
+    </tr>
+</table>
+<button id="add-record">Add record</button>
+<button id="save-record">Save</button>
+
+<script src="../static/libs/jquery-3.1.0.min.js"></script>
+<script src="../static/Payee.js"></script>
+<script src="../static/Record.js"></script>
+<script src="../static/ListRecords.js"></script>
+<script src="../static/records/subcategories-update.js"></script>
+<script src="../static/records/delete-record.js"></script>
+<script src="../static/records/edit-records.js"></script>
