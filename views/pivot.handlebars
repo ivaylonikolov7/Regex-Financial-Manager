@@ -1,0 +1,43 @@
+﻿<link href="../static/pivot.css" rel="stylesheet">
+<table>
+    <tr class='header'>
+        <th colspan="2"></th>
+        {{#each  results.months}}
+            <th>{{@key}}</th>
+        {{/each}}
+    </tr>
+    {{#each results.categoriesWithSubcategories}}
+    {{#showCategory this.category}}
+        <tr class='category'>
+            <td rowspan="{{{getRowSpanLength this.subcategories}}}">
+                {{this.category}}
+            </td>
+        </tr>
+        {{#each this.subcategories}}
+            <tr class='subcategory'>
+                <td>{{this.name}}</td>
+                    {{#each this.amount.months}}
+                        <td class="subcategory-cell">{{parseFloat this}}</td>
+                    {{/each}}
+            </tr>
+        {{/each}}
+    {{/showCategory}}
+        <tr class="grouped-category">
+            <td colspan="2" class="name-of-grouped-category">
+                {{this.category}} Total
+            </td>
+            {{#each this.amountByCategory.monthsInCategory}}
+                <td>{{parseFloat this}}</td>
+            {{/each}}
+        </tr>
+   {{/each}}
+
+    <tr id="grand-total">
+        <td colspan="2">
+            Grand Total
+        </td>        
+        {{#each results.totalAmount.byMonths}}
+            <td>{{parseFloat this}}</td>
+        {{/each}}
+    </tr>
+</table>

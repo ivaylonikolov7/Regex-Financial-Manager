@@ -3,6 +3,8 @@
         <th>Date</th>
         <th>Time</th>
         <th>Amount</th>
+        <th>Original Amount</th>
+        <th>Original Currency</th>
         <th>Description</th>
         <th>Payee</th>
         <th>Category</th>
@@ -23,7 +25,13 @@
                 <input type="text" value="{{this.amount}}" class="amount">
             </td>
             <td>
-                <input type="text" class="description" value="{{this.payee.description}}">
+                <input type="text" value="{{this.originalAmount}}" class="originalAmount" placeholder=" " disabled>
+            </td>
+            <td>
+                <input type="text" value="{{this.originalCurrency}}" class="originalCurrency" placeholder=" " disabled>
+            </td>
+            <td>
+                <input type="text" class="description" value="{{this.description}}">
             </td>
             <td>
                 <input type="text" class="payee" value="{{this.payee.payee}}">
@@ -50,6 +58,9 @@
                 <input type="text" class="expense" disabled value="{{this.expense}}">
             </td>
             <td>
+                <input type="text" disabled class="status" value="{{this.status}}">
+            </td>
+            <td>
                 <button class="delete-record">Delete</button>
             </td>
         </tr>
@@ -63,6 +74,12 @@
         </td>
         <td>
             <input type="text" value="{{this.amount}}" class="amount" placeholder=" ">
+        </td>
+        <td>
+            <input type="text" class="originalAmount" placeholder=" " disabled>
+        </td>
+        <td>
+            <input type="text" class="originalCurrency" placeholder=" " disabled>
         </td>
         <td>
             <input type="text" class="description" value="{{this.payee.description}}">
@@ -89,6 +106,9 @@
         </td>
         <td>
             <input type="text" disabled class="expense">
+        </td>
+        <td>
+            <input type="text" value="Pending" disabled class="expense">
         </td>
         <td>
             <button class="delete-record">Delete</button>

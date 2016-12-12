@@ -1,4 +1,5 @@
 $('.delete-record').on('click', function(){
+    $(this).attr('disabled', true);
     var parentRow = $(this).parent().parent();
     var parentRowId = parentRow.attr('id');
     $.post({

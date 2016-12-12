@@ -1,0 +1,6 @@
+ul li{
+    display:inline-block;
+}
+ul li:before {
+    content: "•";
+}

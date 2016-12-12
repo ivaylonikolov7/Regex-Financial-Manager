@@ -3,9 +3,28 @@
 <head>
     <meta charset="utf-8">
     <title>Example App</title>
+    <link href="../../static/style.css" rel="stylesheet">
 </head>
 <body>
 
+    {{#ifIsLogged}}
+        <nav>
+            <ul>
+                <li>
+                    <a href="/">Records</a>
+                </li>
+                <li>
+                    <a href="/payees">Payees</a>
+                </li>
+                <li>
+                    <a href="/pivot">Report</a>
+                </li>
+                <li>
+                    <a href="/validate">Validate</a>
+                </li>
+            </ul>
+        </nav>
+    {{/ifIsLogged}}
 {{{body}}}
 
 </body>

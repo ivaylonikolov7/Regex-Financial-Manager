@@ -17,7 +17,7 @@ function addRowToTable() {
     timeTd.append(inputTime);
 
     var amountTd = $('<td>');
-    var inputAmount = $('<input>', {class: 'amount', type: 'text'})
+    var inputAmount = $('<input>editPayeeById', {class: 'amount', type: 'text'})
     amountTd.append(inputAmount);
 
     var descriptionTd = $('<td>');
@@ -329,6 +329,8 @@ $(document).ready(function(){
 
     $('#save-record').on('click', function()
     {
+        $(this).prop('disabled', true)
+        var currentThis = $(this);
         var recordsJSON = JSON.stringify(recordsToEdit.returnListRecords())
         var recordsToCreate = JSON.stringify(recordsToAdd.returnListRecords());
         console.log(recordsJSON);
@@ -337,7 +339,20 @@ $(document).ready(function(){
                 method: 'PUT',
                 url: '/edit-records',
                 data: {records: recordsJSON},
-                success: function(){
+                success: function(records){
+                    records.map(function (record) {
+                        var jqueryCategories = $('.added-records#'+record.id +' .categories');
+                        var jquerySubcategories = $('.added-records#'+record.id +' .subcategories');
+                        var subcategoriesFromBase = record.subcategories;
+                        jquerySubcategories.html('');
+                        jquerySubcategories.append($('<option selected value>Select subcategory</option>', {text: 'Select subcategory', value: null}))
+                        subcategoriesFromBase.map(function(subcategory) {
+                            jquerySubcategories.append($('<option>', {text: subcategory.name, value: subcategory.id}))
+                        });
+                        jqueryCategories.val(record.categoryId);
+                        jquerySubcategories.val(record.subcategoryId);
+
+                      })
                     recordsToEdit = new ListRecords();
                 }
             }
@@ -348,15 +363,25 @@ $(document).ready(function(){
                 url: '/post-records',
                 data: {records: recordsToCreate},
                 success: function(addedRecords){
-                    for(i=0; i<recordsToAdd.records.length; i++)
+                    for(i=0; i<addedRecords.length; i++)
                     {
-                        var record = recordsToAdd.records[i];
+                        var record = addedRecords[i];
                         $('tr[guid]').each(function()
                         {
                             $(this).removeAttr('guid')
-                            $(this).attr('id', addedRecords[i])
+                            $(this).attr('id', record.id)
+                            $(this).find('.categories option[value="' + record.categoryId + '"]').attr('selected', true)
+                            var currentThis = $(this);
+                            var subcategories = record.subcategories;
+                            subcategories.map(function(subcategory) {
+                                currentThis.find('.subcategories').append($('<option>', {value: subcategory.id, text:subcategory.name}))
+                                console.log(1);
+                            });
+                            $(this).find('.subcategories option[value="' + record.subcategoryId + '"]').attr('selected', true)
+
                         })
                     }
+                    $(currentThis).prop('disabled', false)
                     recordsToCreate = new ListRecords();
 
                 }

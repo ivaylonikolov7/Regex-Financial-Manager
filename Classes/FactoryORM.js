@@ -1,5 +1,48 @@
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize('email_regex', 'root', '', {host:'localhost'});
+var sequelize = new Sequelize('email_regex', 'root', '', {host:'localhost', logging:false});
+
+var RegexORM = sequelize.define('regexes', {
+    id: {
+        type:Sequelize.INTEGER,
+        autoIncrement:true,
+        primaryKey:true
+    },
+    regex: Sequelize.STRING,
+    amountOrder: Sequelize.INTEGER,
+    payeeOrder: Sequelize.INTEGER,
+    currencyOrder: Sequelize.INTEGER,
+    descriptionOrder: Sequelize.INTEGER,
+    cardOrder: Sequelize.INTEGER,
+    hourOrder: Sequelize.INTEGER,
+    minuteOrder: Sequelize.INTEGER,
+    dayOrder: Sequelize.INTEGER,
+    monthOrder:Sequelize.INTEGER,
+    yearOrder: Sequelize.INTEGER,
+    isMonthlyMail: Sequelize.BOOLEAN,
+    isTransaction: Sequelize.BOOLEAN,
+})
+
+var RolesORM = sequelize.define('roles', {
+    id: {
+        type:Sequelize.INTEGER,
+        autoIncrement:true,
+        primaryKey:true
+    },
+    name: Sequelize.STRING,
+})
+
+var UserORM = sequelize.define('users', {
+    id: {
+        type:Sequelize.INTEGER,
+        autoIncrement:true,
+        primaryKey:true
+    },
+    username: Sequelize.STRING,
+    password: Sequelize.STRING,
+    email: Sequelize.STRING
+});
+
+UserORM.belongsTo(RolesORM);
 
 var SubcategoryORM = sequelize.define('subcategories', {
     id: {
@@ -33,7 +76,7 @@ var VirtualPayeeORM = sequelize.define('virtualpayees', {
 
 VirtualPayeeORM.belongsTo(CategoryORM);
 VirtualPayeeORM.belongsTo(SubcategoryORM);
-
+VirtualPayeeORM.belongsTo(UserORM);
 
 var PayeeORM = sequelize.define('payees', {
     id: {
@@ -44,7 +87,7 @@ var PayeeORM = sequelize.define('payees', {
     payee: Sequelize.STRING,
     description: Sequelize.STRING
 });
-
+PayeeORM.belongsTo(UserORM);
 PayeeORM.belongsTo(CategoryORM);
 PayeeORM.belongsTo(SubcategoryORM);
 
@@ -55,36 +98,23 @@ var RecordORM = sequelize.define('records', {
         primaryKey:true
     },
     example: Sequelize.STRING,
+    description: Sequelize.STRING,
     card: Sequelize.STRING,
     amount: Sequelize.STRING,
-    dateBought: Sequelize.DATE,
+    currency: Sequelize.STRING,
+    date: Sequelize.DATEONLY,
+    time: Sequelize.TIME,
     correction:  Sequelize.FLOAT,
-    note: Sequelize.STRING
+    note: Sequelize.STRING,
+    originalAmount: Sequelize.FLOAT,
+    originalCurrency: Sequelize.STRING,
+    isTransaction: Sequelize.BOOLEAN,
+    status: Sequelize.STRING
 });
-
+RecordORM.belongsTo(UserORM);
 RecordORM.belongsTo(PayeeORM);
 RecordORM.belongsTo(VirtualPayeeORM);
 
-var RolesORM = sequelize.define('roles', {
-    id: {
-        type:Sequelize.INTEGER,
-        autoIncrement:true,
-        primaryKey:true
-    },
-    name: Sequelize.STRING,
-})
-
-var UserORM = sequelize.define('users', {
-    id: {
-        type:Sequelize.INTEGER,
-        autoIncrement:true,
-        primaryKey:true
-    },
-    username: Sequelize.STRING,
-    password: Sequelize.STRING,
-});
-
-UserORM.belongsTo(RolesORM);
 
 var FactoryORM = {
     getORM: function (categoryORM) {
@@ -97,6 +127,7 @@ var FactoryORM = {
             case 'VirtualPayee' : return VirtualPayeeORM;
             case 'User' : return UserORM;
             case 'Role': return RolesORM;
+            case 'Regex': return RegexORM;
         }
     }
 };

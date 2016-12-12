@@ -1,9 +1,11 @@
 var Sequelize = require('sequelize');
 var sequelize = new Sequelize('email_regex', 'root', '', {host:'localhost'});
 var FactoryORM = require('../Classes/FactoryORM');
-
+var Promise = require('bluebird');
 
 var Payee = (function () {
+
+    if (typeof String.prototype.contains === 'undefined') { String.prototype.contains = function(it) { return this.indexOf(it) != -1; }; }
 
     var getAllPayees = function(getAllData)
     {
@@ -13,12 +15,8 @@ var Payee = (function () {
             })
     };
 
-    var getAllPayeesNonraw = function(getAllData)
-    {
-        return FactoryORM.getORM("Payee").sync()
-            .then(function() {
-                return FactoryORM.getORM("Payee").findAll()
-            })
+    var getAllPayeesNonraw = function(filter) {
+        return FactoryORM.getORM("Payee").findAll({where: filter})
     };
     var searchForPayees = function(payee)
     {
@@ -28,14 +26,36 @@ var Payee = (function () {
             }
         });
     }
+
+    var searchForPayeesWithUserId = function(originalPayee,originalDescription, userId) {
+        return FactoryORM.getORM("Payee").findAll({
+            where:{
+                userId: userId
+            }
+        }).then(function(payees){
+            var returnPayee = null;
+           payees.map(function(payee){
+               currentlyLoopedPayeeDescription = (payee.description=='') ? null : payee.description;
+               currentlyLoopedPayeeName = (payee.payee=='') ? null : payee.payee;
+               if((originalPayee || "").contains(currentlyLoopedPayeeName) 
+               || (originalPayee|| "").contains(currentlyLoopedPayeeDescription) 
+               || (originalDescription || '').contains(currentlyLoopedPayeeName)
+                || (originalDescription || '').contains(currentlyLoopedPayeeDescription)){
+                   returnPayee = payee;
+               }
+           })
+            return Promise.resolve(returnPayee);
+        })
+    }
+
     var getAllPayeesWhere = function(raw,filter)
     {
         return FactoryORM.getORM("Payee").findAll({raw: raw, where:filter})
     };
 
-    var insertOnePayee = function(payeeName, description, categoryId, subcategoryId)
+    var insertOnePayee = function(payeeName, description, categoryId, subcategoryId, userId)
     {
-        return FactoryORM.getORM("Payee").create({payee: payeeName, description: description,categoryId: categoryId, subcategoryId: subcategoryId});
+        return FactoryORM.getORM("Payee").create({payee: payeeName, description: description,categoryId: categoryId, subcategoryId: subcategoryId, userId:userId});
     };
 
     var deleteOnePayee = function(id)
@@ -53,10 +73,7 @@ var Payee = (function () {
             description: data.description,
             categoryId: data.category,
             subcategoryId: data.subcategory
-        },
-        {
-            where: {id: id}
-        })
+        }, {where: {id: id}})
     };
 
     return {
@@ -66,7 +83,8 @@ var Payee = (function () {
         getAllPayeesWhere:getAllPayeesWhere,
         editOne:editOne,
         getAllPayeesNonraw:getAllPayeesNonraw,
-        searchForPayees: searchForPayees
+        searchForPayees: searchForPayees,
+        searchForPayeesWithUserId: searchForPayeesWithUserId
     }
 })();
 
