@@ -1103,7 +1103,7 @@ function mailMatchesCounter(match, sameAuthorizationCountExcelArray){
 
 function pad(n){var parsedN = parseInt(n); return (parsedN<10) ? '0'+parsedN : parsedN.toString()}
 
-server.listen(82, function()
+server.listen(port, function()
 {
-    console.log('app listening on port ' + (82));
+    console.log('app listening on port ' + (port));
 });
