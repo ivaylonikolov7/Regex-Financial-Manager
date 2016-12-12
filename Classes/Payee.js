@@ -1,5 +1,5 @@
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize('heroku_1b06a731c23b10d', 'be4f0d9ce8635d', '30c062bc', {host:'localhost', logging:false});
+var sequelize = new Sequelize('heroku_1b06a731c23b10d', 'be4f0d9ce8635d', '30c062bc', {host:'eu-cdbr-west-01.cleardb.com', logging:false});
 var FactoryORM = require('../Classes/FactoryORM');
 var Promise = require('bluebird');
 
