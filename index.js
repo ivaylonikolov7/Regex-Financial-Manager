@@ -606,6 +606,9 @@ app.delete('/delete-record', function (req, res) {
 
 });
 
+app.get('/category', function(){
+    Category.getAllCategories()
+})
 app.post('/post-records', function(req, res) {
     var recordsToAddJSON = JSON.parse(req.body.records);
     var ids = [];
@@ -679,8 +682,7 @@ app.post('/post-records', function(req, res) {
 
 });
 
-app.get('/', function(req, res)
-{
+app.get('/', function(req, res){
     var userId = req.signedCookies['userId'];
     Record.getAllRecords({userId: userId}).then(function(records) {
         var outputRecordModels = [];
@@ -806,6 +808,9 @@ app.get('/', function(req, res)
     })
 });
 
+app.get('/test', function(req, res){
+
+})
 app.put('/edit-records', function(req,res) {
     var recordsJSON = JSON.parse(req.body.records);
     var userId = req.signedCookies['userId'];

@@ -1,5 +1,5 @@
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize('heroku_0ae88800c2f889e', 'bba4f451506644', 'de07756c', {host:'eu-cdbr-west-01.cleardb.com', logging:false});
+var sequelize = new Sequelize('heroku_0ae88800c2f889e', 'bba4f451506644', 'de07756c', {host:'eu-cdbr-west-01.cleardb.com'});
 
 var RegexORM = sequelize.define('regexes', {
     id: {
