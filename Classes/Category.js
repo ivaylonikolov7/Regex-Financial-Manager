@@ -4,7 +4,9 @@ var FactoryORM = require('../Classes/FactoryORM');
 
 var Category = (function () {
     var getAllCategories = function(){
-        return FactoryORM.getORM('Category').sync().then.findAll()
+        return FactoryORM.getORM('Category').sync().then(function(){
+            return FactoryORM.getORM('Category').findAll();
+        })
     };
     var insertCategory = function(categoryName) {
         sequelize.sync().then(function() {
