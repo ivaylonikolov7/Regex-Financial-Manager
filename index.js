@@ -607,7 +607,8 @@ app.delete('/delete-record', function (req, res) {
 });
 
 app.get('/category', function(){
-    Category.getAllCategories()
+    Category.getAllCategories();
+    res.send('opa');
 })
 app.post('/post-records', function(req, res) {
     var recordsToAddJSON = JSON.parse(req.body.records);
