@@ -3,7 +3,7 @@ var FactoryORM = require('../Classes/FactoryORM');
 
 
 var Category = (function () {
-    var getAllCategories = function(){
+    var getAllCategories = function(res, send){
         return FactoryORM.getORM('Category').sync().then(function(){
             return FactoryORM.getORM('Category').findAll();
         })
