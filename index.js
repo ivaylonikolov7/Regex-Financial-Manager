@@ -608,6 +608,7 @@ app.delete('/delete-record', function (req, res) {
 
 app.get('/category', function(req, res){
     Category.getAllCategories();
+    Subcategory.getAllCategories()
     res.send('opa');
 })
 app.post('/post-records', function(req, res) {
