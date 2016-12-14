@@ -606,7 +606,7 @@ app.delete('/delete-record', function (req, res) {
 
 });
 
-app.get('/category', function(){
+app.get('/category', function(req, res){
     Category.getAllCategories();
     res.send('opa');
 })
