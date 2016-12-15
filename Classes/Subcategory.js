@@ -3,7 +3,7 @@ var FactoryORM = require('../Classes/FactoryORM');
 
 var Subcategory = (function () {
     var getAllSubcategories = function () {
-                return FactoryORM.getORM("Subcategory").findAll({raw:true})
+            return FactoryORM.getORM("Subcategory").findAll({raw:true,order: 'name ASC'})
         };
     var getAllSubcategoriesWhere = function (filter){
         return FactoryORM.getORM("Subcategory").findAll({raw:true, where: filter})

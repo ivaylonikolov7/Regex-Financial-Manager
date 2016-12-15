@@ -327,6 +327,23 @@ $(document).ready(function(){
     })
 
 
+    $('table').on('change',  '.added-records td .status', function() {
+        var rowThis = $(this).parent().parent();
+        var selectThis = $(this);
+        var row = extractDataFromRow(rowThis, selectThis);
+        addGuidToRow(rowThis);
+        var guid = rowThis.attr('guid');
+
+        var record = new Record(guid,row.dateInput, row.timeInput, row.amount, row.payeeName, row.correction, row.note, row.categoryId, row.subcategoryId, row.description);
+        if(recordsToAdd.checkIfUniqueRecord(record.id)) {
+            recordsToAdd.addRecord(record);
+        }
+        else {
+            recordsToAdd.editRecord(record.id, row.thisClass, row.thisValue)
+        }
+
+    })
+
     $('#save-record').on('click', function()
     {
         $(this).prop('disabled', true)

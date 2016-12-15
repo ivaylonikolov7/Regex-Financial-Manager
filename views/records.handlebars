@@ -58,7 +58,10 @@
                 <input type="text" class="expense" disabled value="{{this.expense}}">
             </td>
             <td>
-                <input type="text" disabled class="status" value="{{this.status}}">
+                <select class='status'>
+                    <option {{isItPending 'Pending' this}}>Pending</option>
+                    <option {{isItPending 'Reconciled' this}}>Reconciled</option>
+                </select>                
             </td>
             <td>
                 <button class="delete-record">Delete</button>
@@ -108,7 +111,9 @@
             <input type="text" disabled class="expense">
         </td>
         <td>
-            <input type="text" value="Pending" disabled class="expense">
+            <select class='status' disabled>
+                <option>Pending</option>
+            </select>                
         </td>
         <td>
             <button class="delete-record">Delete</button>

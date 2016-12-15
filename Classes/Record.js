@@ -1,5 +1,3 @@
-var Sequelize = require('sequelize');
-var sequelize = new Sequelize('email_regex', 'root', '', {host:'localhost'});
 var FactoryORM = require('../Classes/FactoryORM');
 var Promise = require('bluebird');
 var Payee = require('../Classes/Payee');
@@ -11,8 +9,8 @@ var Record = (function () {
     var getAllRecords = function(filter, orderByDateAndTime)
     {
         return FactoryORM.getORM("Record").sync()
-            .then(function() {
-                return FactoryORM.getORM("Record").findAll({where: filter, order: 'date DESC' })
+        .then(function() {
+            return FactoryORM.getORM("Record").findAll({where: filter, order: 'date DESC' })
          })
     }
 

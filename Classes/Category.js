@@ -1,11 +1,10 @@
-var Sequelize = require('sequelize');
 var FactoryORM = require('../Classes/FactoryORM');
 
 
 var Category = (function () {
     var getAllCategories = function(){
         return FactoryORM.getORM('Category').sync().then(function(){
-            return FactoryORM.getORM('Category').findAll();
+            return FactoryORM.getORM('Category').findAll({order: 'name ASC'});
         })
     };
     var insertCategory = function(categoryName) {

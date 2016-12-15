@@ -20,13 +20,13 @@ var RecordsGroupedOutput = require('./Classes/RecordsGroupedOutput');
 var fileUpload = require('express-fileupload');
 var Excel = require('exceljs');
 var request = require('ajax-request');
-
+var config = require('config.json');
 var imap = {
 
-    username: "regexmailformat@gmail.com",
-    password: "pogchamp12",
+    username: config.username,
+    password: config.password,
     host: "imap.gmail.com",
-    port: 993, // imap port
+    port: 993,
     tls:true,
     markSeen:true
 };
@@ -607,8 +607,6 @@ app.delete('/delete-record', function (req, res) {
 });
 
 app.get('/category', function(req, res){
-    Category.getAllCategories();
-    Subcategory.getAllCategories()
     res.send('opa');
 })
 app.post('/post-records', function(req, res) {
@@ -762,9 +760,7 @@ app.get('/', function(req, res){
             .then(function (results) {
                 var categories = results[0];
                 var subcategories = results[1];
-                if(req.signedCookies['username']!=null) {
-                    res.render('records', {
-                        outputRecordModels: outputRecordModels, helpers: {
+                var helpers = {
                             showCategoryOptions: function (id) {
                                 var returnCategoryString = '';
                                 for (var i = 0; i < categories.length; i++) {
@@ -798,8 +794,19 @@ app.get('/', function(req, res){
                                 else{
                                     return options.inverse(this)
                                 }
+                            },
+                            isItPending: function(optionStatus, record){
+                                if(record.status==optionStatus){
+                                    return 'selected';
+                                }
+                                else{
+                                    return '';
+                                }
                             }
-                        }
+                }
+                if(req.signedCookies['username']!=null) {
+                    res.render('records', {
+                        outputRecordModels: outputRecordModels, helpers: helpers
                     })
                 }
                 else {
